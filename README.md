@@ -1,68 +1,57 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# **`Lights Out`**
 
-## Available Scripts
+![](_images/lightOuts.gif)
 
-In the project directory, you can run:
+This exercise provides a chance to work with React events where the state and events happen in different classes.
 
-### `npm start`
+## **`The Game`**
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Lights Out is a logic/puzzle game, played on a gird of individual lights, which can either be lit or unlit. The puzzle is won when when all of the lights are turned off. I am personally TERRIBLE at this game. I hope you are better at playing it than I am!
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+You can click on a cell to toggle that light — but it also toggles the light above it, to the left of it, to the right of it, and below it. (Cells on an edge or in the corner won’t flip as many lights, since they are missing some neighbors).
 
-### `npm test`
+## **`Plan`**
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Before reading further, take a moment to think about how you would design this, component-wise.
 
-### `npm run build`
+We’ll give you a component design further down, but thinking about the requirements and what components/state/props would be needed will help you learn the skills to design applications out of components.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## **`Code`**
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+This game will be built from three components:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### **`Component Design`**
 
-### `npm run eject`
+#### **`App`**
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+As often, this is a very simple component. It just renders the `Board` component.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### **`Board`**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+The most sophisticated component. It will hold the state that represents the in-memory grid of true/false for lights-on/off. Since the state for the board lives here, this is also were the `setState()` calls will need to go — and therefore, all the functions that call `setState()`.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+#### **`Cell`**
 
-## Learn More
+A simpler component. This will simply render a `<div>`, where the CSS classes will indicate whether this cell is lit or unlit. This is what the user clicks on — but it will need to call a function it receives from the `Board`, since that will need to update the state.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+When the game is won, the board should not be shown, but a simple “You Won” message should show in its place.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+A small amount of code is provided, but there are lots of places where you’ll need to write code to get the game functional.
 
-### Code Splitting
+## **`Further Study`**
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+#### **`Default Properties`**
 
-### Analyzing the Bundle Size
+Add default properties for the board sizes and how likely it is the a light on the initial board is turned on or off.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+#### **`Improve Our CSS`**
 
-### Making a Progressive Web App
+The CSS we provided is enough to visualize the game working, but it could be improved in a million ways: better colors, rounded shapes, or CSS animations might make it nicer.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+#### **`Ensure A Game Is Winnable`**
 
-### Advanced Configuration
+Depending on the size of your board, some lights-on/lights-off starting configurations may not actually be solvable — which is pretty mean for your users.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+It’s relatively difficult to decide if any given board is solvable (here’s some [light reading on this topic](https://ida.mtholyoke.edu/bitstream/handle/10166/693/375.pdf?sequence=1&isAllowed=y)) — but there is a simple trick to make sure a starting board you give a player is solvable.
 
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Figure out how to do this.
